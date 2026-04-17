@@ -13,7 +13,7 @@ INSERT INTO Salesman(Salesman_ID,Name,City,Comission) VALUES
 (5007,'Paul Adam','Rome',0.13),
 (5003,'Lauson Hen','San Jose',0.12);
 
-CREATE TABLE Customers(
+CREATE TABLE Customer(
     Customer_ID TEXT,
     Customer_Name TEXT PRIMARY KEY,
     City TEXT,
@@ -21,7 +21,7 @@ CREATE TABLE Customers(
     Salesman_ID TEXT
 );
 
-INSERT INTO Customers(Customer_ID,Customer_Name,City,Grade,Salesman_ID) VALUES
+INSERT INTO Customer(Customer_ID,Customer_Name,City,Grade,Salesman_ID) VALUES
 ('3002','Nick Rimando','New York','100','5001'),
 ('3007','Brad Davis','New York','200','5001'),
 ('3005','Graham Zusi','California','200','5002'),
@@ -47,14 +47,19 @@ INSERT INTO ORDERS(ORDER_NO,PURCHASE_AMOUNT,ORDER_DATE,CUSTOMER_ID,SALESMAN_ID) 
 ('70007','948.5','2012-09-10','3005','5005'),
 ('70005','2400.6','2012-07-27','3007','5006');
 
-SELECT Customers.Customer_Name,Salesman.Name,Salesman.City FROM Customer JOIN Salesman ON Customer.City = Salesman.City;
+SELECT Customer.Customer_Name,Salesman.Name,Salesman.City FROM Customer JOIN Salesman ON Customer.City = Salesman.City;
 
-SELECT Customer.Customer_Name,Salesman_Name FROM Customers JOIN Salesman ON Customers.Salesman_ID = Salesman.Salesman_ID;
+SELECT Customer.Customer_Name,Salesman.Name FROM Customer JOIN Salesman ON Customer.Salesman_ID = Salesman.Salesman_ID;  
 
-SELECT ORDERS.ORDER_NO,Customers.Customer_Name,ORDERS.CUSTOMER_ID,ORDERS.SALESMAN_ID FROM ORDERS JOIN Customers ON ORDERS.CUSTOMER_ID = Customers.Customer_ID JOIN Salesman ON ORDERS.SALESMAN_ID = Salesman.Salesman_ID WHERE Customers.City <> Salesman.City;
+SELECT ORDERS.ORDER_NO,Customer.Customer_Name,ORDERS.CUSTOMER_ID,ORDERS.SALESMAN_ID FROM ORDERS JOIN Customer ON ORDERS.CUSTOMER_ID = Customer.Customer_ID JOIN Salesman ON ORDERS.SALESMAN_ID = Salesman.Salesman_ID WHERE Customer.City <> Salesman.City;
 
-SELECT ORDERS.ORDER_NO,Customers.Customer_Name FROM ORDERS JOIN Customers ON ORDERS.CUSTOMER_ID = Customers.Customer_ID;
+SELECT ORDERS.ORDER_NO,Customer.Customer_Name FROM ORDERS JOIN Customer ON ORDERS.CUSTOMER_ID = Customer.Customer_ID;
 
-SELECT Customers.Customer_Name AS 'Customer',Customer.Grade AS 'Grade' FROM ORDERS JOIN Salesman ON ORDERS.SALESMAN_ID = Salesman.Salesman_ID JOIN Customers ON ORDERS.CUSTOMER_ID = Customer.Customer_ID WHERE Customer.Grade IS NOT NULL;
+SELECT Customer.Customer_Name AS 'Customer',Customer.Grade AS 'Grade' FROM ORDERS JOIN Salesman ON ORDERS.SALESMAN_ID = Salesman.Salesman_ID JOIN Customer ON ORDERS.CUSTOMER_ID = Customer.Customer_ID WHERE Customer.Grade IS NOT NULL;
 
-SELECT Customer.Customer_Name AS 'Customer',Customer.City AS 'City',Salesman.Name AS 'Salesman', Salesman.Comission FROM Customers JOIN Salesman ON Customer.Salesman_ID =  Salesman.Salesman_ID WHERE Salesman .Comission BETWEEN 
+SELECT Customer.Customer_Name AS 'Customer',Customer.City AS 'City',Salesman.Name AS 'Salesman', Salesman.Comission FROM Customer JOIN Salesman ON Customer.Salesman_ID =  Salesman.Salesman_ID WHERE Salesman .Comission BETWEEN 0.12 AND 0.14;
+
+SELECT ORDERS.ORDER_NO, Customer.Customer_Name,Salesman.Comission AS 'Comission%', ORDERS.PURCHASE_AMOUNT * Salesman.Comission AS 'Commission' FROM ORDERS JOIN Salesman ON ORDERS.SALESMAN_ID = Salesman.Salesman_ID JOIN Customer ON ORDERS.CUSTOMER_ID = Customer.Customer_ID WHERE Customer.Grade >= 200;
+
+SELECT * FROM Customer JOIN ORDERS ON Customer.Customer_ID = ORDERS.CUSTOMER_ID WHERE ORDERS.ORDER_DATE = '2012-10-05';
+

@@ -1,0 +1,26 @@
+CREATE TABLE COMPANY(
+    CUSTOMER_NAME TEXT,
+    PRODUCTS TEXT,
+    PRODUCT_ID TEXT,
+    ABOUT_COUNTRY TEXT,
+    CUSTOMER_COUNTRY TEXT
+);
+
+INSERT INTO COMPANY(CUSTOMER_NAME,PRODUCTS,PRODUCT_ID,ABOUT_COUNTRY,CUSTOMER_COUNTRY) VALUES
+('Harish','Body Moisturiser','001','Nice','U.K'),
+('Borb','Pen','003','Cool','India'),
+('Aam','Thermocol','024','Cold','Russia'),
+('Anegohn','Keyboard','136','Nice','India'),
+('Soroh','Mouse','137','Also Cold','Mongolia'),
+('Jahn','Mic','140','Nice','India'),
+('Korntosvokyet','Monitor','138','Europe','Ukraine');
+
+SELECT * FROM COMPANY;
+
+SELECT * FROM COMPANY WHERE CUSTOMER_NAME LIKE 'A%';
+
+SELECT * FROM COMPANY WHERE CUSTOMER_NAME LIKE '%or%';
+
+SELECT PRODUCTS,PRODUCT_ID FROM COMPANY;
+
+SELECT CUSTOMER_COUNTRY, ABOUT_COUNTRY FROM COMPANY;

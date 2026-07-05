@@ -22,7 +22,7 @@ def prob(a:int,b:int,total):
         (prob_a*prob_bga),
         2
     )
-
+x
 probability = (prob(blue_shirts,red_shirts,total_num))*100
 prob_percentage = str(int(probability))+'%'
 

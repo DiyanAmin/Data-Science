@@ -1,0 +1,1 @@
+print(f'Probability of person testing positive having strep throat is: {str(int(round(((0.2*0.85) / ((0.2*0.85) + (0.8*0.02))),2)*100))}%')

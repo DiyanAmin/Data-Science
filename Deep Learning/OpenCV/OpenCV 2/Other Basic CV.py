@@ -13,7 +13,7 @@ cv2.imshow('Processed Image',resized_image)
 key  = cv2.waitKey(0)
 
 if key == ord('s'):
-    cv2.imwrite(f'p_color.{image_name.split('.')[1]},resized_image)
+    cv2.imwrite(f'p_color.{image_name.split('.')[1]}',resized_image)
     print('Image saved.')
 else:
     print('Image not saved')
